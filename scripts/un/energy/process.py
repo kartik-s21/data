@@ -592,7 +592,6 @@ def main(_):
             f'Please specify files to process with --csv_data_files=<,>')
 
 
-
 if __name__ == '__main__':
     logging.info('running main')
     app.run(main)

@@ -66,5 +66,6 @@ class TestUNEnergyProcess(unittest.TestCase):
                 filecmp.cmp(test_output + output, expected_output + output))
 
 
+
 if __name__ == '__main__':
     unittest.main()

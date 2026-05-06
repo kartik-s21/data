@@ -98,6 +98,8 @@ def retry_method(url, headers=None):
 def download_files():
     start_year = FLAGS.data_start_year
     end_year = FLAGS.data_end_year
+    # The latest year being attempted is end_year - 2 (e.g., 2026 - 2 = 2024)
+    latest_year = end_year - 2
 
     for year in range(start_year, end_year - 1):
         last_two_digits_formatted = f"{year % 100:02d}"
@@ -136,10 +138,20 @@ def download_files():
                             )
             except (requests.exceptions.RequestException,
                     zipfile.BadZipFile) as e:
-                logging.warning(
-                    f"An error occurred while downloading {url}: {e}. Skipping."
-                )
-                continue
+                # Check if this is the latest year which might not be published yet (404)
+                is_404 = (isinstance(e, requests.exceptions.HTTPError) and
+                          e.response.status_code == 404)
+                if year == latest_year and is_404:
+                    logging.warning(
+                        f"Latest year {year} not yet available at {url}. Skipping."
+                    )
+                    continue
+                else:
+                    # For historical years or non-404 errors, we want the script to fail
+                    logging.error(
+                        f"Critical failure: Could not download historical data for {year} at {url}."
+                    )
+                    raise e
 
 
 def main(argv):

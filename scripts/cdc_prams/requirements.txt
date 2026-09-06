@@ -1,0 +1,6 @@
+# Requirements for US CDC PRAMS import scripts
+absl-py
+beautifulsoup4
+pandas
+requests
+tabula-py

@@ -219,7 +219,7 @@ def _flatten_header_and_sub_header(df) -> pd.DataFrame:
     df = df.replace({'Geo': _PLACE_MAP})
     df = df.reset_index(drop=True)
     # Creating a new column named as 'ScalingFactor'
-    df.insert(1, 'ScalingFactor', np.NaN)
+    df.insert(1, 'ScalingFactor', np.nan)
     return df
 
 
@@ -421,7 +421,7 @@ def prams(input_url: list, years: list = None) -> pd.DataFrame:
             df = df.drop(['2017_Nan', '2018_Nan', '2019_Nan', '2020_Nan'],
                          axis=1)
         # inserting an extra column so that the first column
-        df.insert(1, '2016_sampleSize', np.NaN)
+        df.insert(1, '2016_sampleSize', np.nan)
         # Removing unwanted charaters
         df['statVar'] = df['statVar'].str.replace('• ', '')
         df = _merging_multiline_sv(df, geo, years=years)

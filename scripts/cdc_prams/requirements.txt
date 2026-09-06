@@ -1,6 +1,2 @@
-# Requirements for US CDC PRAMS import scripts
-absl-py
-beautifulsoup4
-pandas
-requests
+# Requirements for US CDC PRAMS import scripts (in addition to import-automation/executor/requirements.txt)
 tabula-py

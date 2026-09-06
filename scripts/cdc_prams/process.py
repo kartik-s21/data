@@ -60,6 +60,14 @@ def _merging_multiline_sv(df, geo, years=None):
         'Heavy drinking (≥8 drinks a week) during the 3 months before',
         'Experienced IPV during pregnancy by a husband or partner'
     ]
+    for year in years:
+        sample_col = year + '_sampleSize'
+        if sample_col in df.columns:
+            df[sample_col] = df[sample_col].astype(object)
+        ci_col = year + '_CI'
+        if ci_col in df.columns:
+            df[ci_col] = df[ci_col].astype(object)
+
     # Converting the multiline statistical variable into single line
     # statistical variable
     for line in multiline:
